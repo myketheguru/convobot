@@ -7,7 +7,7 @@ const execute = (user, msg) => {
     // bank.db[user].items.push(menuObj.menu[msg])
 
     if (bank.db[user].name) {
-        return [`Where are you reaching us from? Give us an address.`]
+        return [`${bank.db[user].name}, \nWhere are you reaching us from? Give us an address.`]
     }
     return [`Hello ${msg}\nWhere are you reaching us from? Give us an address.`]
 }

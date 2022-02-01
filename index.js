@@ -28,7 +28,9 @@ function start(client) {
       console.log('author',message.from);
     let resp = stages.steps[getStage(message.from)].obj.execute(
       message.from,
-      message.body
+      message.body,
+      message,
+      client
     )
 
     for (let index = 0; index < Array(resp).length; index++) {

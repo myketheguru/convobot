@@ -1,2 +1,5 @@
 /node_modules
 /_IGNORE_Emergency_response
+npm-debug.log
+.DS_Store
+/*.env

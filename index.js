@@ -69,7 +69,7 @@ function start(client) {
   autoRefresh:true, //default to true
   safeMode: true,
   disableSpins: true,
-  hostNotificationLang: NotificationLanguage.PTBR,
+  hostNotificationLang: 'en-gb',
   viewport: {
     // width: 1920,
     height: 1200
@@ -77,5 +77,6 @@ function start(client) {
   popup: 3012,
   defaultViewport: null,
   }
+
   
   create(config).then(start);

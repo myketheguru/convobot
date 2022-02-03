@@ -59,15 +59,23 @@ function start(client) {
 
   const config = {
     sessionId: "Emergency_response",
-    multiDevice: true, //required to enable multiDevice support
-    authTimeout: 60, //wait only 60 seconds to get a connection with the host account device
-    blockCrashLogs: true,
-    disableSpins: true,
-    headless: true,
-    hostNotificationLang: 'en-gb',
-    logConsole: false,
-    popup: true,
-    qrTimeout: 0, //0 means it will wait forever for you to scan the qr code
+    useChrome: true,
+  restartOnCrash: start,
+  headless:false,
+  throwErrorOnTosBlock:true,
+  qrTimeout:0,   //set to 0 to wait forever for a qr scan
+  authTimeout:0, //set to 0 to wait forever for connection to phone
+  killProcessOnBrowserClose: true,
+  autoRefresh:true, //default to true
+  safeMode: true,
+  disableSpins: true,
+  hostNotificationLang: NotificationLanguage.PTBR,
+  viewport: {
+    // width: 1920,
+    height: 1200
+  },
+  popup: 3012,
+  defaultViewport: null,
   }
   
   create(config).then(start);

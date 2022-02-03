@@ -76,6 +76,7 @@ function start(client) {
   },
   popup: 3012,
   defaultViewport: null,
+  url: "https://github.com/heroku/heroku-buildpack-google-chrome.git",
   }
 
   

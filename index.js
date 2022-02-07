@@ -1,9 +1,14 @@
 const fsn = require('fs')
 const fs = require('fs-extra')
 const { create, Client } = require('@open-wa/wa-automate');
+const express = require('express')
 
 const { db } = require('./src/bank')
 const stages = require('./src/stages')
+
+const app = express()
+app.use(express.json())
+const PORT = 8082;
 
 // '👋 Hello! I\'m kelly. Emergency response assistant for Micheal. Please tell me your name'
 
@@ -23,7 +28,16 @@ function getStage(user) {
   }
 }
 
+app.get('/all-chats', (req, res) => {
+  res
+})
+
 function start(client) {
+  app.use(client.middleware);
+  app.listen(PORT, function () {
+    console.log(`\n• Listening on port ${PORT}!`);
+  });
+
     client.onMessage(async message => {
       console.log('author',message.from);
     let resp = stages.steps[getStage(message.from)].obj.execute(

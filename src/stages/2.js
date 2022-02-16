@@ -20,6 +20,7 @@ function execute (user, msg) {
     
     issuesList += '\n------------------- \n'
     
+    bank.db[user].reqObj.address = msg
     
     bank.db[user].stage = 3
     return [`Tell us what happened \n_Send a number if it is any of the following_\n\n ${issuesList} \n\nYou can send *#* to cancel this operation.`]

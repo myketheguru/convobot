@@ -23,6 +23,14 @@ function getStage(user) {
       db[user] = {
           stage: 0,
           items: [],
+          reqObj: {
+            name: '',
+            issue: '',
+            address: '',
+            image_url1: '',
+            image_url2: '',
+            status: 'pending',
+          }
       };
       return db[user].stage;
   }
@@ -40,6 +48,7 @@ function start(client) {
 
     client.onMessage(async message => {
       console.log('author',message.from);
+      console.log(message.body, 'from', message.from);
     let resp = stages.steps[getStage(message.from)].obj.execute(
       message.from,
       message.body,

@@ -1,9 +1,17 @@
 const fsn = require('fs')
 const fs = require('fs-extra')
+const cloudinary = require('cloudinary').v2;
 const { decryptMedia } = require('@open-wa/wa-automate');
 const mime = require('mime-types')
 const bank = require('../bank')
 const stagesStore = require('../stages')
+
+cloudinary.config({ 
+    cloud_name: 'univel', 
+    api_key: '668754156425555', 
+    api_secret: 'Jcsg3awnT9KcjmNeyy6M3fJLp-c',
+    secure: true
+  });
 
 function execute (user, msg, fullMsg, client) {
 
@@ -11,6 +19,16 @@ function execute (user, msg, fullMsg, client) {
         bank.db[user].stage = 0
         return ['You have successfully cancelled the operation']
     }
+
+    if (msg.toLowerCase() === 'no image') {
+        bank.db[user].stage = 5
+        return [`Thank you. \nIs there anything else we should Know?` ]
+    }
+
+    if (!fullMsg.mimetype) {
+        bank.db[user].stage = 4
+        return [`Please, submit an image before you can proceed. If you do not have an image, reply with 'no image'`]
+    }    
 
     (async function () {
 
@@ -37,6 +55,12 @@ function execute (user, msg, fullMsg, client) {
                             return console.log(err);
                         }
                         console.log('The file was saved!');
+                        cloudinary.uploader.upload(`${dir}/${filename}`, function(error, result) {
+                            console.log(result, error)
+                            if (result) {
+                                bank.db[user].reqObj.image_url1 = result.secure_url
+                            }
+                        });
                     });
                 })
                 .catch(err => console.log(err))

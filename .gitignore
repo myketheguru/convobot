@@ -3,3 +3,9 @@
 npm-debug.log
 .DS_Store
 /*.env
+
+# managed
+**.data.json
+**.node-persist**
+**_IGNORE_**
+# end managed
